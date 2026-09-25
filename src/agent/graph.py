@@ -11,18 +11,20 @@ tools = [calculate_imc]
 llm_with_tools = llm.bind_tools(tools)
 
 def call_model(state: AgentState):
+    """Invoke the LLM with the current conversation state."""
     messages = state["messages"]
     response = llm_with_tools.invoke(messages)
     return {"messages": [response]}
 
 def should_continue(state: AgentState):
+    """Determine whether to route to tools or end the conversation."""
     messages = state["messages"]
     last_message = messages[-1]
     if last_message.tool_calls:
         return "tools"
     return END
 
-
+# Build LangGraph workflow
 workflow = StateGraph(AgentState)
 
 workflow.add_node("agent", call_model)

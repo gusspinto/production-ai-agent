@@ -1,5 +1,5 @@
 from langgraph.graph import MessagesState
 
-# Podes expandir este estado no futuro se precisares de mais variáveis (ex: user_metadata)
 class AgentState(MessagesState):
+    """Defines the state schema for the agent graph."""
     pass
