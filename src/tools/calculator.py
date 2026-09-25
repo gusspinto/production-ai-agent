@@ -2,17 +2,17 @@ from langchain_core.tools import tool
 
 @tool
 def calculate_imc(weight: float, height: float) -> str:
-    """Calcula o Índice de Massa Corporal (IMC) com base no peso (kg) e altura (m)."""
+    """Calculate Body Mass Index (BMI) based on weight (kg) and height (m)."""
     try:
         imc = weight / (height ** 2)
         if imc < 18.5:
-            classification = "Abaixo do peso"
+            classification = "Underweight"
         elif 18.5 <= imc < 25:
-            classification = "Peso normal"
+            classification = "Normal weight"
         elif 25 <= imc < 30:
-            classification = "Sobrepeso"
+            classification = "Overweight"
         else:
-            classification = "Obesidade"
-        return f"O seu IMC é {imc:.2f}, classificado como: {classification}."
+            classification = "Obesity"
+        return f"Your BMI is {imc:.2f}, classified as: {classification}."
     except Exception as e:
-        return f"Erro ao calcular o IMC: {str(e)}"
+        return f"Error calculating BMI: {str(e)}"
